@@ -1,0 +1,31 @@
+.contactList {
+}
+
+.contactItem {
+  outline: 1px solid teal;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 15px;
+  margin-bottom: 8px;
+  border-radius: 2px;
+}
+
+.contactItem:last-child {
+  margin-bottom: 0;
+}
+
+.contactBtnDel {
+  padding: 8px 15px;
+  background-color: rgb(169, 63, 9);
+  color: white;
+  border: transparent;
+  border-radius: 4px;
+  box-shadow: 1px 2px 2px 0 rgb(0 0 0 / 0.5);
+  transition: box-shadow 250ms linear, background-color 250ms linear;
+}
+
+.contactBtnDel:active {
+  box-shadow: 2px 5px 2px 0 rgb(0 0 0 / 0.5);
+  background-color: rgb(153, 34, 34);
+}
