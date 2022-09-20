@@ -3,7 +3,6 @@ import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
-import Section from './Section';
 import css from './App.module.css';
 import initialcontacts from 'contacts.json';
 
@@ -46,7 +45,7 @@ class App extends Component {
   };
 
   render() {
-    const { contacts, filter } = this.state;
+    const { filter } = this.state;
 
     return (
       <div className={css.container}>
