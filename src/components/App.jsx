@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
+import { Report } from 'notiflix/build/notiflix-report-aio';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
@@ -10,16 +11,17 @@ class App extends Component {
   state = {
     contacts: initialcontacts,
     filter: '',
-    // name: '',
   };
 
   addContact = ({ name, number }) => {
-    // const { contacts } = this.state;
+    const { contacts } = this.state;
     const newContact = { id: nanoid(), name, number };
 
-    this.setState(({ contacts }) => ({
-      contacts: [...contacts, newContact],
-    }));
+    contacts.some(contact => contact.name === name)
+      ? Report.warning(`${name} is already in contacts`)
+      : this.setState(({ contacts }) => ({
+          contacts: [...contacts, newContact],
+        }));
   };
 
   deleteContact = contactId => {
@@ -27,10 +29,6 @@ class App extends Component {
       contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     }));
   };
-
-  // formSubmitHandler = e => {
-  //   console.log(e);
-  // };
 
   changeFilter = e => {
     this.setState({
@@ -49,8 +47,9 @@ class App extends Component {
 
     return (
       <div className={css.container}>
-        <h2 className={css.title}>Phonebook</h2>
+        <h1 className={css.title}>Phonebook</h1>
         <ContactForm onSubmit={this.addContact} />
+
         <h2 className={css.title}>Contacts</h2>
         <Filter value={filter} onChange={this.changeFilter} />
         <ContactList contacts={this.getVisibleContact()} onDeleteContact={this.deleteContact} />
