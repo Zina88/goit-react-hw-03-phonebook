@@ -11,6 +11,12 @@
   border: 1px solid teal;
   margin-bottom: 10px;
   border-radius: 2px;
+  transition: border 250ms linear;
+}
+
+.input:focus-visible {
+  border: 1px solid rgb(9, 169, 108);
+  outline: none;
 }
 
 .button {
