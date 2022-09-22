@@ -7,6 +7,11 @@ import Filter from './Filter';
 import css from './App.module.css';
 import initialcontacts from 'contacts.json';
 
+Report.init({
+  width: '300px',
+  borderRadius: '15px',
+});
+
 class App extends Component {
   state = {
     contacts: initialcontacts,
@@ -18,7 +23,7 @@ class App extends Component {
     const newContact = { id: nanoid(), name, number };
 
     contacts.some(contact => contact.name === name)
-      ? Report.warning(`${name} is already in contacts`)
+      ? Report.warning(`${name}`, 'This user is already in contact!', 'Close')
       : this.setState(({ contacts }) => ({
           contacts: [...contacts, newContact],
         }));
