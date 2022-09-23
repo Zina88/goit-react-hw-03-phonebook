@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import { Report } from 'notiflix/build/notiflix-report-aio';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
