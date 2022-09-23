@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import { Report } from 'notiflix/build/notiflix-report-aio';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
 import css from './App.module.css';
-import initialcontacts from 'contacts.json';
 
 Report.init({
   width: '300px',
@@ -14,7 +14,7 @@ Report.init({
 
 class App extends Component {
   state = {
-    contacts: initialcontacts,
+    contacts: [],
     filter: '',
   };
 
@@ -47,8 +47,24 @@ class App extends Component {
     return contacts.filter(({ name }) => name.toLowerCase().includes(normalizedFilter));
   };
 
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  componentDidUpdate(prevState) {
+    if (this.state.contacts !== prevState) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   render() {
     const { filter } = this.state;
+    const length = this.state.contacts.length;
 
     return (
       <div className={css.container}>
@@ -56,8 +72,15 @@ class App extends Component {
         <ContactForm onSubmit={this.addContact} />
 
         <h2 className={css.title}>Contacts</h2>
-        <Filter value={filter} onChange={this.changeFilter} />
-        <ContactList contacts={this.getVisibleContact()} onDeleteContact={this.deleteContact} />
+
+        {length > 0 ? (
+          <div>
+            <Filter value={filter} onChange={this.changeFilter} />
+            <ContactList contacts={this.getVisibleContact()} onDeleteContact={this.deleteContact} />
+          </div>
+        ) : (
+          <p className={css.isEmpty}>Contact list is empty</p>
+        )}
       </div>
     );
   }
