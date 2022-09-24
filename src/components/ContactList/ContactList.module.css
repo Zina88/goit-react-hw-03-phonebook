@@ -1,6 +1,6 @@
 .contactItem {
   display: grid;
-  grid-template-columns: 0.7fr 1fr 30px;
+  grid-template-columns: 1fr 1fr 30px;
   outline: 1px solid teal;
   padding: 15px;
   margin-bottom: 8px;
