@@ -1,17 +1,15 @@
 .iconBtn {
+  width: 30px;
+  height: 30px;
   margin: 0;
   padding: 3px;
   border: none;
   border-radius: 50%;
-  color: white;
-  font: inherit;
   cursor: pointer;
-  /* box-shadow: 0.1px 0.1px 2px 0 rgb(0 0 0 / 0.5), -0.1px -0.1px 2px 0 rgb(0 0 0 / 0.5); */
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: box-shadow 250ms linear;
   color: white;
   background-color: rgb(153, 34, 34);
 
