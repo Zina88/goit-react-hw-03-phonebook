@@ -4,6 +4,8 @@ import { Report } from 'notiflix/build/notiflix-report-aio';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import Filter from './Filter';
+import Modal from './Modal';
+import IconButton from './IconButton';
 import css from './App.module.css';
 
 Report.init({
@@ -15,6 +17,7 @@ class App extends Component {
   state = {
     contacts: [],
     filter: '',
+    showModal: false,
   };
 
   addContact = ({ name, number }) => {
@@ -26,6 +29,8 @@ class App extends Component {
       : this.setState(({ contacts }) => ({
           contacts: [...contacts, newContact],
         }));
+
+    this.toggleModal();
   };
 
   deleteContact = contactId => {
@@ -61,17 +66,29 @@ class App extends Component {
     }
   }
 
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
+  };
+
   render() {
-    const { filter } = this.state;
+    const { filter, showModal } = this.state;
     const length = this.state.contacts.length;
 
     return (
       <div className={css.container}>
         <h1 className={css.title}>Phonebook</h1>
-        <ContactForm onSubmit={this.addContact} />
 
+        <IconButton onClick={this.toggleModal} className={css.addContact} aria-label="Add contact">
+          Add contact
+        </IconButton>
+        {showModal && (
+          <Modal onClose={this.toggleModal}>
+            <ContactForm onSubmit={this.addContact} />
+          </Modal>
+        )}
         <h2 className={css.title}>Contacts</h2>
-
         {length > 0 ? (
           <div>
             <Filter value={filter} onChange={this.changeFilter} />
