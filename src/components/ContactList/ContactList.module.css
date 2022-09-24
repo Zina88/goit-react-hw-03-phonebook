@@ -2,10 +2,9 @@
 }
 
 .contactItem {
+  display: grid;
+  grid-template-columns: 1fr 1fr 30px;
   outline: 1px solid teal;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 15px;
   margin-bottom: 8px;
   border-radius: 2px;
